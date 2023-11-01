@@ -6,7 +6,7 @@ function App() {
     <main>
       <div className="map-container">
         <Map />
-        <p>This is a map!!</p>
+        <p>Tribhuwan International Airport</p>
       </div>
     </main>
   );
