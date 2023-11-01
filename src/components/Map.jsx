@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  FeatureGroup,
   MapContainer,
   Marker,
   Popup,
@@ -8,13 +9,17 @@ import {
 } from "react-leaflet";
 
 const Map = () => {
-  const [markerPosition, setMarkerPosition] = useState([
-    27.700379692577663, 85.35719108777057,
+  const [markerList, setMarkerList] = useState([
+    { lat: 27.72, lng: 85.3579 },
+    { lat: 27.70001, lng: 85.3579002 },
   ]);
 
   const CustomMarker = () => {
     useMapEvent("click", (e) =>
-      setMarkerPosition([e.latlng.lat, e.latlng.lng])
+      setMarkerList((oldList) => [
+        ...oldList,
+        { lat: e.latlng.lat, lng: e.latlng.lng },
+      ])
     );
     return null;
   };
@@ -31,11 +36,18 @@ const Map = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <CustomMarker />
-      <Marker position={markerPosition}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
+
+      <FeatureGroup>
+        {markerList.map(({ lat, lng }, index) => {
+          return (
+            <Marker key={index} position={[lat, lng]}>
+              <Popup>
+                Latitute: {lat} and Longitude: {lng}
+              </Popup>
+            </Marker>
+          );
+        })}
+      </FeatureGroup>
     </MapContainer>
   );
 };
