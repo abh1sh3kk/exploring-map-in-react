@@ -1,12 +1,11 @@
 import "./App.css";
-import Map from "./components/Map";
+import TheMap from "./components/TheMap";
 
 function App() {
   return (
     <main>
       <div className="map-container">
-        <Map />
-        <p>Tribhuwan International Airport</p>
+        <TheMap />
       </div>
     </main>
   );
